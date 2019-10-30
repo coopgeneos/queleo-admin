@@ -1,0 +1,12 @@
+<nb-card (click)="goToCommunity()" >
+  <div class="icon-container">
+    <div class="icon status-primary">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <div class="details">
+    <div class="title h5">{{community.name | capitalize}}</div>
+    <div class="status paragraph-2">{{community.description | capitalize}}</div>
+  </div>
+</nb-card>

@@ -1,0 +1,66 @@
+<!-- Order Widget -->
+<div class="row">
+  <nb-card class="card-filter"> 
+    <nb-card-header>Orden cronológico</nb-card-header>
+    <nb-card-body>
+      <nb-select selected="desc">
+        <nb-option value="desc" (click)="changeOrder('desc')">Nuevos al inicio</nb-option>
+        <nb-option value="asc" (click)="changeOrder('asc')">Viejos al inicio</nb-option>
+      </nb-select>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Search Widget -->
+<div class="row">
+  <nb-card class="card-filter">
+    <nb-card-header>Filtrar por título o contenido</nb-card-header>
+    <nb-card-body>
+      <input type="text" 
+        nbInput fullWidth fieldSize="small" placeholder="Ingrese texto..." 
+        (input)="filterByTitle($event.target.value)">
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Sources Widget -->
+<div class="row">
+  <nb-card class="card-filter">
+    <nb-card-header>Filtrar por fuentes</nb-card-header>
+    <nb-card-body>
+      <div class="demo-items">
+        <nb-checkbox *ngFor="let source of sources; let i = index" [checked]="source.selected"
+          (change)="filterBySource(i, $event.target.checked)">{{source.name | capitalize}}
+        </nb-checkbox>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Categories Widget -->
+<div class="row">
+  <nb-card class="card-filter">
+    <nb-card-header>Filtrar por categorías</nb-card-header>
+    <nb-card-body>
+      <div class="demo-items">
+        <nb-checkbox *ngFor="let category of categories; let i = index" [checked]="category.selected"
+          (change)="filterByCategory(i, $event.target.checked)">{{category.name | capitalize}}
+        </nb-checkbox>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Hidde fields Widget -->
+<div class="row">
+  <nb-card class="card-filter">
+    <nb-card-header>Ocultar campos</nb-card-header>
+    <nb-card-body>
+      <div class="demo-items">
+        <nb-checkbox *ngFor="let field of hiddenFields; let i = index" [checked]="field.selected"
+          (change)="hiddeField(i, $event.target.checked)">{{field.name | translate : 'EN_ES' | capitalize}}
+        </nb-checkbox>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

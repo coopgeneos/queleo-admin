@@ -1,0 +1,49 @@
+<div class="row" style="margin: auto;">
+  <nb-card size="medium" class="col-md-12 col-lg-5 col-xxxl-5" style="margin: auto; max-height: 300px;">
+    <nb-card-header>
+      <span>Miembros</span>
+    </nb-card-header>
+    <nb-list class="user-activity-list">
+      <nb-list-item *ngFor="let member of community.members">
+        <div class="two-cols-first">
+          {{ member }}
+        </div>
+        <div class="two-cols-second">
+          <nb-actions size="medium">
+            <nb-action icon="close-outline" (click)="removeMember(member);"></nb-action>
+          </nb-actions>
+        </div>
+      </nb-list-item>
+    </nb-list>
+    <nb-actions size="medium" style="margin-top: 20px">
+      <nb-action icon="plus-circle-outline" (click)="openAddMemberForm();" style="margin-left: 85%"></nb-action>
+    </nb-actions>
+  </nb-card>
+
+  <nb-card size="medium" class="col-md-12 col-lg-5 col-xxxl-5" style="margin: auto; max-height: 300px;">
+    <nb-card-header>
+      <span>RSS</span>
+    </nb-card-header>
+    <nb-list class="user-activity-list">
+      <nb-list-item *ngFor="let rss of community.rss">
+        <div class="two-cols-first">
+          {{ rss.source }} - {{ rss.category }}
+        </div>
+        <div class="two-cols-second">
+          <nb-actions size="medium">
+            <nb-action icon="close-outline" (click)="removeRss(rss)"></nb-action>
+          </nb-actions>
+        </div>
+      </nb-list-item>
+    </nb-list>
+    <nb-actions size="medium" style="margin-top: 20px">
+      <nb-action icon="plus-circle-outline" (click)="openAddRssForm();" style="margin-left: 85%"></nb-action>
+    </nb-actions>
+  </nb-card>
+</div>
+
+<div class="row" style="margin-top: 50px">
+  <ngx-news-list [rssPath]="rssPath" [sourcesPath]="sourcesPath"></ngx-news-list>
+</div>
+
+

@@ -1,0 +1,15 @@
+<nb-card>
+  <nb-card-header>Ingrese los datos</nb-card-header>
+  <nb-card-body>
+    <input #source nbInput fullWidth placeholder="Fuente">
+    <nb-select selected="-1" fullWidth>
+      <nb-option value="-1" (click)="selectCategory(null)">Seleccione...</nb-option>
+      <nb-option *ngFor="let category of categories | async" value="category.name" (click)="selectCategory(category.name)">{{category.name}}</nb-option>
+    </nb-select>
+    <input #url fullWidth nbInput placeholder="Url">
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">Cancelar</button>
+    <button nbButton status="success" (click)="submit([source.value, url.value])">Enviar</button>
+  </nb-card-footer>
+</nb-card>

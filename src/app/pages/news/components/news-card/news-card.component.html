@@ -1,0 +1,20 @@
+<article>
+  <img class="card-img-top" src="{{feed.image ? feed.image : null}}" alt="No hay imagen"
+    *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
+  <h2 *ngIf="hiddenFields != null && !hiddenFields.includes('title')">{{feed.title}}</h2>
+  <p *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}</p>
+  <a [attr.href]="feed.link" target="_blank">Leer más</a>
+  <div class="card-footer text-muted" *ngIf="hiddenFields != null && !hiddenFields.includes('data')">
+    {{feed.creator | capitalize}} - {{feed.pubDate | date:'dd-MM-yyyy'}}
+    
+    <div class="row" style="float: right;">
+      <nb-actions size="small">
+        <nb-action icon="facebook-outline" (click)="share('facebook');"></nb-action>
+        <nb-action icon="twitter-outline" (click)="share('twitter');"></nb-action>
+        <nb-action icon="linkedin-outline" (click)="share('linkedin');"></nb-action>
+        <nb-action icon="{{status.icon}}" badgeText="{{status.text}}" badgeStatus="{{status.status}}" (click)="toFavorites();"></nb-action>
+      </nb-actions>  
+    </div>
+
+  </div>
+</article>

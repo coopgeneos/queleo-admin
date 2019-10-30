@@ -1,0 +1,12 @@
+<nb-card class="tagsDialog">
+  <nb-card-header>Favorites</nb-card-header>
+  <nb-card-body> 
+    <p> 
+      <span *ngFor="let tag of tags; let i=index" [ngStyle]="getStyle(i)" (click)="addTag(tag.value)">{{tag.value + ' '}}</span>
+    </p>
+    <div class="row">
+      <input type="text" nbInput class="inputTags" fieldSize="tiny" placeholder="Ingrese sus tags separados por espacios" [(ngModel)]="newTags">
+      <button nbButton status="info" size="tiny" class="buttonAdd" (click)="addToFavorite()">Agregar</button>
+    </div>
+  </nb-card-body>
+</nb-card>
