@@ -9,6 +9,9 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { NewsModule } from './news/news.module';
 import { CommunitiesModule } from './communities/communities.module';
+import { AuthModule } from '../auth/auth.module'
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 @NgModule({
   imports: [
@@ -19,11 +22,16 @@ import { CommunitiesModule } from './communities/communities.module';
     ECommerceModule,
     MiscellaneousModule,
     NewsModule,
-    CommunitiesModule
+    CommunitiesModule,
+    AuthModule
   ],
   declarations: [
     PagesComponent,
   ],
+  providers: [
+    AngularFireAuth, 
+    AngularFireAuthGuard
+  ]
 })
 export class PagesModule {
 }

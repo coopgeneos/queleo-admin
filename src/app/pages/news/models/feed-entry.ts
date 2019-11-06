@@ -17,7 +17,7 @@ export class FeedEntry {
       this.link = obj.link ? obj.link : null;
       this.pubDate = obj.pubDate ? new Date(obj.pubDate) : null;
       this.creator = obj['dc:creator'] ? obj['dc:creator'] : null;
-      this.image = obj.enclosure && obj.enclosure['@attributes'] ? obj.enclosure['@attributes'] : null;
+      this.image = obj.enclosure && obj.enclosure['@attributes'] ? obj.enclosure['@attributes']['url'] : null;
     } catch(err) {
       throw err;
     }

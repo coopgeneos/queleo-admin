@@ -1,10 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService, NbMenuItem, NbSearchService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../../auth/auth.service';
+import { Router } from '@angular/router';
+import { NbMenuInternalService } from '@nebular/theme/components/menu/menu.service';
+import { NewsListComponent } from '../../../pages/news/components/news-list/news-list.component';
 
 @Component({
   selector: 'ngx-header',
@@ -40,20 +44,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
 
+  pagesWithsearch: string[] = ['/pages/news', '/pages/community/'];
+  showSearch: boolean = false;
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private authService: AuthService,
+              private router: Router,
+              private searchService: NbSearchService) {
+
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    this.userService.getUsers()
+    /* this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+      .subscribe((users: any) => this.user = users.nick); */
+
+    this.user = this.authService.getLoggedUser();
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -69,6 +82,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+
+    this.searchService.onSearchSubmit().subscribe(
+      data => {
+        console.log("header.component.ts - onInit()",data.term);
+      })
+
+    this.menuService.onItemClick().subscribe(
+      menuBag => {
+        if(menuBag.item.title === this.userMenu[1].title) {
+          this.authService.logout().then(() => this.router.navigate(["pages"]))
+        }
+      })
+
+    /* this.router.events.subscribe(
+      data => {
+        if(data['navigationTrigger'] == "imperative") {
+          this.showSearch = false;
+          for(let i=0; i<this.pagesWithsearch.length; i++) {
+            if(data['url'].includes(this.pagesWithsearch[i])) {
+              this.showSearch = true;
+              break;
+            }
+          }
+        }
+      }
+    ) */
+
   }
 
   ngOnDestroy() {
@@ -91,4 +131,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
+  /* logout() : void {
+    this.authService.logout()
+      .then(() => this.router.navigate(["pages"]))
+  } */
+
+  isLoggedIn() : boolean {
+    return this.authService.getLoggedUser() != null;
+  }
+
 }

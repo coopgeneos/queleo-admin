@@ -1,14 +1,17 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { hasCustomClaim, redirectUnauthorizedTo, AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
-import { NewsFilterComponent } from './news/components/news-filter/news-filter.component';
 import { NewsListComponent } from './news/components/news-list/news-list.component';
 import { CommunityListComponent } from './communities/components/community-list/community-list.component';
 import { CommunityComponent } from './communities/components/community/community.component';
+
+const adminOnly = hasCustomClaim('admin');
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth/login']);
 
 const routes: Routes = [{
   path: '',
@@ -17,14 +20,17 @@ const routes: Routes = [{
     {
       path: 'news',
       component: NewsListComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
     },
     {
       path: 'communities',
       component: CommunityListComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
     },
     {
       path: 'community/:id',
-      component: CommunityComponent
+      component: CommunityComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
     },
     {
       path: 'dashboard',

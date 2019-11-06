@@ -5,6 +5,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-app',

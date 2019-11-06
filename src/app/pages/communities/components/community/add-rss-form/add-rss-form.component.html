@@ -1,15 +1,15 @@
 <nb-card>
   <nb-card-header>Ingrese los datos</nb-card-header>
   <nb-card-body>
-    <input #source nbInput fullWidth placeholder="Fuente">
-    <nb-select selected="-1" fullWidth>
+    <input #source nbInput fullWidth shape="round" placeholder="Fuente" class="inputRssForm">
+    <nb-select selected="-1" fullWidth shape="round" class="inputRssForm">
       <nb-option value="-1" (click)="selectCategory(null)">Seleccione...</nb-option>
       <nb-option *ngFor="let category of categories | async" value="category.name" (click)="selectCategory(category.name)">{{category.name}}</nb-option>
     </nb-select>
-    <input #url fullWidth nbInput placeholder="Url">
+    <input #url nbInput fullWidth shape="round" placeholder="Url" class="inputRssForm">
   </nb-card-body>
   <nb-card-footer>
-    <button class="cancel" nbButton status="danger" (click)="cancel()">Cancelar</button>
-    <button nbButton status="success" (click)="submit([source.value, url.value])">Enviar</button>
+    <button class="formButton" nbButton status="danger" (click)="cancel()">Cancelar</button>
+    <button class="formButton" nbButton status="success" (click)="submit([source.value, url.value])">Enviar</button>
   </nb-card-footer>
 </nb-card>

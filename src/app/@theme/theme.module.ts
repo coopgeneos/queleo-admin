@@ -38,6 +38,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { AuthService } from '../auth/auth.service';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -80,6 +81,7 @@ export class ThemeModule {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
       providers: [
+        AuthService,
         ...NbThemeModule.forRoot(
           {
             name: 'default',

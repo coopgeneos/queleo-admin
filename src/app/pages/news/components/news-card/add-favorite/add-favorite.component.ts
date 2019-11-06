@@ -7,6 +7,7 @@ import { Favorite } from '../../../models/favorite';
 import { NewsService } from '../../../news.service';
 import { FeedEntry } from '../../../models/feed-entry';
 import { ToastAlertService } from '../../../../../services/toast-alert.service';
+import { AuthService } from '../../../../../auth/auth.service';
 
 @Component({
   selector: 'ngx-add-favorite',
@@ -27,13 +28,16 @@ export class AddFavoriteComponent implements OnInit {
     protected dialogRef: NbDialogRef<AddFavoriteComponent>,
     protected userService: UsersService,
     protected newsService: NewsService,
-    protected toastService: ToastAlertService
+    protected toastService: ToastAlertService,
+    protected authService: AuthService
   ) { }
 
   ngOnInit() {
     this.feed = this.dialogRef.componentRef.instance['feed'];
 
-    this.userService.getUserByEmail("ibgomezo@gmail.com").subscribe(
+    let logged = this.authService.getLoggedUser();
+
+    this.userService.getUserByEmail(logged.email).subscribe(
       user => { 
         this.loggedUser = user; 
         this.tags = user.tags ? user.tags : [];

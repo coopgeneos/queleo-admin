@@ -7,7 +7,7 @@ import { FeedEntry } from './models/feed-entry';
 import { HttpClient } from '@angular/common/http';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 import { Category } from './models/category';
-
+import * as moment from 'moment';
 @Injectable()
 export class NewsService {
   
@@ -76,7 +76,10 @@ export class NewsService {
 
   addFeed(feed: FeedEntry) : Promise<string> {
     return new Promise((resolve, reject) => {
-      return this.firebaseDB.list<FeedEntry>(`/news`).push(feed)
+      let obj = JSON.stringify(feed);
+      obj = JSON.parse(obj);
+      obj['pubDate'] = moment(obj['pubDate']).format("YYYY-MM-DD HH:mm")
+      return this.firebaseDB.list(`/news`).push(obj)
         .then(ref => resolve(ref.key))
         .catch(err => reject(err))
     })

@@ -7,7 +7,8 @@ import {
   NbCheckboxModule, 
   NbActionsModule, 
   NbInputModule,
-  NbDialogModule
+  NbDialogModule,
+  NbButtonModule
 } from '@nebular/theme';
 import { ThemeModule } from '../../@theme/theme.module';
 import { NewsModule } from '../news/news.module';
@@ -55,6 +56,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     NbSelectModule, 
     NbActionsModule, 
     NbInputModule,
+    NbButtonModule,
     ThemeModule,
     NewsModule,
     NbDialogModule.forChild(),

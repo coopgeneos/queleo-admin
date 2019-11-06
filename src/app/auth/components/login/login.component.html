@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>Login</nb-card-header>
+  <nb-card-body>
+    <input #email type="text" nbInput fullWidth shape="round" placeholder="Email" class="iptLogin">
+    <input #password type="password" nbInput fullWidth shape="round" placeholder="Password" class="iptLogin">
+  </nb-card-body>
+  <nb-card-footer>
+    <a [routerLink]="['/register']">I haven't an account</a>
+    <button nbButton status="success" (click)="login([email.value, password.value])" class="btnLogin">Login</button>
+  </nb-card-footer>
+</nb-card>

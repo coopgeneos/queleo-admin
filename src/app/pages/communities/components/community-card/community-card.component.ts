@@ -16,7 +16,6 @@ export class CommunityCardComponent implements OnInit {
   ngOnInit() { }
 
   goToCommunity() : void {
-    console.log("click", this.community.id)
     this.router.navigate(["/pages/community/"+this.community.id]);
   }
 
