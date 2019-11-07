@@ -28,6 +28,7 @@ import { ToastAlertService } from '../../services/toast-alert.service'
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { firebaseConfig } from '../../../../../configs/queleo-config';
 
 @NgModule({
   declarations: [
@@ -39,17 +40,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
   ],
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(
-      {
-        apiKey: "AIzaSyAxnLKpUd89lUjH9vDdU6_A4aueAUiKaBk",
-        authDomain: "noticion-test.firebaseapp.com",
-        databaseURL: "https://noticion-test.firebaseio.com",
-        projectId: "noticion-test",
-        storageBucket: "noticion-test.appspot.com",
-        messagingSenderId: "615542152153",
-        appId: "1:615542152153:web:72049b92b8e40527"
-      }, 
-      'noticion'),
+    AngularFireModule.initializeApp(firebaseConfig, 'noticion'),
     AngularFireDatabaseModule,
     NbCardModule,
     NbListModule,

@@ -14,6 +14,7 @@ import { ToastAlertService } from '../services/toast-alert.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { firebaseConfig } from '../../../../configs/queleo-config';
 
 //Components
 import { LoginComponent } from './components/login/login.component';
@@ -32,17 +33,7 @@ import { AuthService } from './auth.service';
   imports: [
     AuthRoutingModule,
     CommonModule,
-    AngularFireModule.initializeApp(
-      {
-        apiKey: "AIzaSyAxnLKpUd89lUjH9vDdU6_A4aueAUiKaBk",
-        authDomain: "noticion-test.firebaseapp.com",
-        databaseURL: "https://noticion-test.firebaseio.com",
-        projectId: "noticion-test",
-        storageBucket: "noticion-test.appspot.com",
-        messagingSenderId: "615542152153",
-        appId: "1:615542152153:web:72049b92b8e40527"
-      }, 
-      'noticion'),
+    AngularFireModule.initializeApp(firebaseConfig, 'noticion'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ThemeModule,
