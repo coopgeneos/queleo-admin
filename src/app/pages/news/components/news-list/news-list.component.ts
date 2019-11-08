@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NewsService } from '../../news.service';
 import { RSS } from '../../models/rss';
-import {
-  NbComponentStatus,
-  NbGlobalLogicalPosition,
-  NbGlobalPhysicalPosition,
-  NbGlobalPosition,
-  NbToastrService,
-} from '@nebular/theme';
+import { NbComponentStatus } from '@nebular/theme';
 import { FeedEntry } from '../../models/feed-entry';
+import { ToastAlertService } from '../../../../services/toast-alert.service';
 
 @Component({
   selector: 'ngx-news-list',
@@ -43,7 +38,7 @@ export class NewsListComponent implements OnInit {
     'danger',
   ];
 
-  constructor(private newsService: NewsService, private toastrService: NbToastrService) {
+  constructor(private newsService: NewsService, private toastrService: ToastAlertService) {
     if(!this.rssPath) this.rssPath = '/rssx';
     if(!this.sourcesPath) this.sourcesPath = null;
     this.title = "De su interés..."
@@ -103,7 +98,7 @@ export class NewsListComponent implements OnInit {
           resolve(entries)
         })
         .catch(err => {
-          this.showToast("warning", "Atención!", `No se puediron cargar las noticias de ${rss.source.toUpperCase()}`)
+          this.toastrService.showAlert("warning", "Atención!", `No se puediron cargar las noticias de ${rss.source.toUpperCase()}`)
           resolve(null)
         })
     })
@@ -189,7 +184,7 @@ export class NewsListComponent implements OnInit {
 
       this.listCard.loading = false;
     } catch(err) {
-      this.showToast('danger', 'Error', err)
+      this.toastrService.showAlert('danger', 'Error', err)
     }
   }
 
@@ -205,22 +200,6 @@ export class NewsListComponent implements OnInit {
       }
     }
     return array;
-  }
-
-  private showToast(type: NbComponentStatus, title: string, body: string) {
-    const config = {
-      status: type,
-      destroyByClick: true,
-      duration: 2000,
-      hasIcon: true,
-      position: NbGlobalPhysicalPosition.TOP_RIGHT,
-      preventDuplicates: false,
-    };
-
-    this.toastrService.show(
-      body,
-      title,
-      config);
   }
 
 }
