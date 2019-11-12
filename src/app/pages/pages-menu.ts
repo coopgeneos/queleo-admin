@@ -8,6 +8,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Favorites',
+    icon: 'cast-outline',
+    link: '/pages/favorites',
+    home: true,
+  },
+  {
     title: 'Communities',
     icon: 'people-outline',
     link: '/pages/communities',

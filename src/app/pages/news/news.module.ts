@@ -65,7 +65,7 @@ import { TranslatorPipe } from './pipes/translator.pipe';
     NbIconModule,
     NbButtonModule
   ],
-  exports: [ CapitalizePipe, TranslatorPipe, NewsListComponent ],
+  exports: [ CapitalizePipe, TranslatorPipe, NewsListComponent, NewsCardPlaceholderComponent ],
   providers: [ NewsService, UsersService, ToastAlertService ],
   entryComponents: [ AddFavoriteComponent ]
 })

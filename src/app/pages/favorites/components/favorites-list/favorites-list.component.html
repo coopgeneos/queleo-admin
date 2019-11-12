@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="infinite-cards col-md-12 col-lg-8 col-xxxl-8">
+    <nb-card>
+      <nb-card-header>{{title}}</nb-card-header>
+      <nb-list
+        nbInfiniteList
+        listenWindowScroll
+        [threshold]="500"
+        (bottomThreshold)="loadNext(null)">
+        <nb-list-item *ngFor="let newsPost of listCard.news">
+          <ngx-favorites-card [feed]="newsPost" [hiddenFields]="hiddenFields"></ngx-favorites-card>
+        </nb-list-item>
+        <nb-list-item *ngFor="let _ of listCard.placeholders">
+          <ngx-favorites-card-placeholder></ngx-favorites-card-placeholder>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-12 col-lg-4 col-xxxl-4">
+    <ngx-favorites-filter [sourcesPath]="sourcesPath" (updateFilter)="loadNext($event)"></ngx-favorites-filter>
+  </div>
+
+</div>

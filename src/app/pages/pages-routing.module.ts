@@ -9,6 +9,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { NewsListComponent } from './news/components/news-list/news-list.component';
 import { CommunityListComponent } from './communities/components/community-list/community-list.component';
 import { CommunityComponent } from './communities/components/community/community.component';
+import { FavoritesListComponent } from './favorites/components/favorites-list/favorites-list.component';
 
 const adminOnly = hasCustomClaim('admin');
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth/login']);
@@ -21,6 +22,10 @@ const routes: Routes = [{
       path: 'news',
       component: NewsListComponent,
       canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    },
+    {
+      path: 'favorites',
+      component: FavoritesListComponent,
     },
     {
       path: 'communities',
