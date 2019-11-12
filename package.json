@@ -47,6 +47,7 @@
     "@nebular/theme": "4.4.0",
     "@swimlane/ngx-charts": "^10.0.0",
     "angular-tree-component": "7.2.0",
+    "angular-user-idle": "^2.2.1",
     "angular2-chartjs": "0.4.1",
     "angular2-toaster": "^7.0.0",
     "bootstrap": "4.3.1",

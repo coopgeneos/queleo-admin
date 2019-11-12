@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Community } from '../../models/community';
 import { CommunitiesService } from '../../communities.service';
 import { Observable } from 'rxjs';
+import { AuthUser } from '../../../../auth/models/authUser';
+import { AuthService } from '../../../../auth/auth.service';
 
 @Component({
   selector: 'ngx-community-list',
@@ -10,12 +12,16 @@ import { Observable } from 'rxjs';
 })
 export class CommunityListComponent implements OnInit {
 
+  loggedUser: AuthUser;
   communities: Observable<Community[]>;
 
-  constructor(private communitiesService: CommunitiesService) { }
+  constructor(
+    private communitiesService: CommunitiesService,
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.communities = this.communitiesService.getAllCommunities("ibgomezo@gmail.com");
+    this.loggedUser = this.authService.getLoggedUser()
+    this.communities = this.communitiesService.getAllCommunities(this.loggedUser.email);
     this.communities.subscribe();
   }
 

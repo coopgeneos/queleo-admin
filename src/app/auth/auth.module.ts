@@ -9,6 +9,7 @@ import {
 import { ThemeModule } from '../@theme/theme.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ToastAlertService } from '../services/toast-alert.service';
+import { UserIdleModule } from 'angular-user-idle';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -20,6 +21,7 @@ import { firebaseConfig } from '../../../../configs/queleo-config';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthComponent } from './auth.component';
+import { IdleUserComponent } from './components/idle-user/idle-user.component';
 
 //Services
 import { AuthService } from './auth.service';
@@ -28,7 +30,8 @@ import { AuthService } from './auth.service';
   declarations: [
     LoginComponent, 
     RegisterComponent, 
-    AuthComponent  
+    AuthComponent ,
+    IdleUserComponent
   ],
   imports: [
     AuthRoutingModule,
@@ -40,8 +43,10 @@ import { AuthService } from './auth.service';
     NbCardModule,
     NbInputModule,
     NbButtonModule,
-    NbLayoutModule
+    NbLayoutModule,
+    UserIdleModule,
   ],
-  providers: [AuthService, AngularFireAuth, ToastAlertService]
+  providers: [AuthService, AngularFireAuth, ToastAlertService],
+  entryComponents: [ IdleUserComponent ],
 })
 export class AuthModule { }
