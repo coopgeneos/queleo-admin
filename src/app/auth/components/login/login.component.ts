@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
     private dialogService: NbDialogService) { }
 
   ngOnInit() {
-    this.userIdle.setConfigValues({idle: 10, timeout: 30, ping: 0})
+    // Preparacion del tiempo de inactividad: 600 segs (10 mins) de inactividad y se dipara 
+    // el popup advirtiendo que se cerrará la session.
+    // Una vez mostrado el popup tiene 30 segundos para estirar la session o se cerrará
+    this.userIdle.setConfigValues({idle: 600, timeout: 30, ping: 0})
     this.userIdle.onTimerStart().subscribe(
       time => {
         if(time == 1) {
