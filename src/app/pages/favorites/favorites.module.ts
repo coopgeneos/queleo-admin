@@ -13,7 +13,8 @@ import {
   NbButtonModule,
 } from '@nebular/theme';
 import { ThemeModule } from '../../@theme/theme.module';
-import { NewsModule } from '../news/news.module'
+import { NewsModule } from '../news/news.module';
+import { AuthModule } from '../../auth/auth.module';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -33,6 +34,7 @@ import { ToastAlertService } from '../../services/toast-alert.service';
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TranslatorPipe } from './pipes/translator.pipe';
+import { AuthService } from '../../auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -72,10 +74,11 @@ import { TranslatorPipe } from './pipes/translator.pipe';
     NbDialogModule.forChild(),
     NbIconModule,
     NbButtonModule,
-    NewsModule
+    NewsModule,
+    AuthModule
   ],
   //exports: [ CapitalizePipe, TranslatorPipe, FavoritesListComponent ],
-  providers: [ FavoritesService, UsersService, ToastAlertService ],
+  providers: [ FavoritesService, UsersService, ToastAlertService, AuthService ],
  // entryComponents: [ AddFavoriteComponent ]
 })
 export class FavoritesModule { }

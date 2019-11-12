@@ -84,7 +84,6 @@ export class FavoritesService {
           feed._init(result.payload.val());
           feed.creator = result.payload.val()['creator'];
           feed.guid = result.key;
-          console.log("getFeedByKey", key, feed)
           return feed
         } else return null;
       })

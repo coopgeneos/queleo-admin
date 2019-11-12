@@ -26,6 +26,7 @@ const routes: Routes = [{
     {
       path: 'favorites',
       component: FavoritesListComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
     },
     {
       path: 'communities',
