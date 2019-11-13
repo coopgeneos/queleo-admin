@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>Nueva comunidad</nb-card-header>
+  <nb-card-body>
+    <input #name nbInput fullWidth shape="round" placeholder="Nombre" class="inputForm">
+    <input #description nbInput fullWidth shape="round" placeholder="Descripcion" class="inputForm">
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="formButton" nbButton status="danger" (click)="cancel()">Cancelar</button>
+    <button class="formButton" nbButton status="success" (click)="add(name.value, description.value)">Enviar</button>
+  </nb-card-footer>
+</nb-card>

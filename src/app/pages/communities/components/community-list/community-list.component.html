@@ -1,5 +1,11 @@
 <div class="row" style="margin: auto;">
-  <ngx-community-card class="col-md-12 col-lg-6 col-xxxl-6" style="float: left; margin: auto;" 
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <button class="formButton" nbButton status="success" (click)="addCommunity()">Nueva</button>
+  </div>
+</div>
+
+<div class="row" style="margin: auto;">
+  <ngx-community-card class="commCard col-md-12 col-lg-6 col-xxxl-6"  
     *ngFor="let community of communities | async" [community]="community">
   </ngx-community-card>
 </div>

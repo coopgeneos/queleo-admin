@@ -13,6 +13,14 @@ export class CommunitiesService {
 
   constructor(private firebaseDB: AngularFireDatabase) { }
 
+  addCommunity(community: Community) : Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.firebaseDB.list('/communities').push(community)
+        .then(ref => resolve(ref.key))
+        .catch(err => reject(err))
+    })
+  }
+
   getCommunity(id: string) : Observable<Community> {
     try {
       return this.firebaseDB.object('/communities/' + id).snapshotChanges().pipe(
@@ -91,7 +99,7 @@ export class CommunitiesService {
       return c.owner == email
     });
     let byMember = communities.filter(c => {
-      return c.members.includes(email)
+      return c.members && c.members.includes(email)
     });
     let result: Community[] = byOwner.concat(byMember);
     result = this.deleteDuplicated(result, 'id');

@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Favorites',
-    icon: 'cast-outline',
+    icon: 'flag-outline',
     link: '/pages/favorites',
     home: true,
   },

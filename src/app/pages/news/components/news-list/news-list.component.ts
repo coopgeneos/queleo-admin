@@ -171,8 +171,6 @@ export class NewsListComponent implements OnInit {
   */
   async loadNext(filter: any) {
     try {
-      console.log(filter)
-
       if (this.listCard.loading) { return; }
 
       this.listCard.loading = true;
@@ -180,7 +178,6 @@ export class NewsListComponent implements OnInit {
 
       await this.loadRSS();
       await this.filterRSS(filter)
-      console.log(this.filteredRss,this.rssList,filter,"list")
 
       await this.loadFeeds();
       await this.filterFeeds(filter);

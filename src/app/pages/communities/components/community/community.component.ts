@@ -64,6 +64,9 @@ export class CommunityComponent implements OnInit {
     this.communityService.getUserByEmail(email).subscribe(
       user => {
         if(user) {
+          if(!this.community.members) {
+            this.community.members = [];
+          }
           this.community.members.push(email);
           this.communityService.setMembers(this.id, this.community.members);
         } else {
@@ -95,6 +98,7 @@ export class CommunityComponent implements OnInit {
       this.toastService.showAlert('danger', 'Error', "El RSS esta mal formado")
       return
     }
+    if(!this.community.rss) { this.community.rss = []; }
     let rss = this.community.rss.find(elem => {
       return elem.url.toLowerCase() == newRss.url.toLowerCase();
     });
@@ -124,6 +128,7 @@ export class CommunityComponent implements OnInit {
   }
 
   private addSource(source: string) {
+    if(!this.community.sources) { this.community.sources = []; }
     let found = this.community.sources.filter(s => {
       return s.toLowerCase() == source.toLowerCase()
     });

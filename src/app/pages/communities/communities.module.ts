@@ -19,6 +19,7 @@ import { CommunityListComponent } from './components/community-list/community-li
 import { CommunityComponent } from './components/community/community.component';
 import { AddMemberFormComponent } from './components/community/add-member-form/add-member-form.component';
 import { AddRssFormComponent } from './components/community/add-rss-form/add-rss-form.component';
+import { AddCommunityFormComponent } from './components/community-list/add-community-form/add-community-form.component';
 
 //Services
 import { CommunitiesService } from './communities.service';
@@ -36,7 +37,8 @@ import { firebaseConfig } from '../../../../../configs/queleo-config';
     CommunityListComponent, 
     CommunityComponent, 
     AddMemberFormComponent, 
-    AddRssFormComponent
+    AddRssFormComponent,
+    AddCommunityFormComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { firebaseConfig } from '../../../../../configs/queleo-config';
   ],
   entryComponents: [ 
     AddMemberFormComponent, 
-    AddRssFormComponent 
+    AddRssFormComponent,
+    AddCommunityFormComponent 
   ],
 })
 export class CommunitiesModule { }
