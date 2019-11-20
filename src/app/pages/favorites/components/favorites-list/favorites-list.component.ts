@@ -10,6 +10,7 @@ import { ToastAlertService } from '../../../../services/toast-alert.service';
 import { Favorite } from '../../models/favorite';
 import { AuthUser } from '../../../../auth/models/authUser';
 import { AuthService } from '../../../../auth/auth.service';
+import { database } from 'firebase';
 
 @Component({
   selector: 'ngx-favorites-list',
@@ -25,6 +26,8 @@ export class FavoritesListComponent implements OnInit {
   newTags: string = "";
   tags: Tag[]
   title: string;
+  filteredFeed: FeedEntry[];
+
 
   allFavorites: any;
   listCard = {
@@ -183,7 +186,22 @@ export class FavoritesListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.favoriteService.getAllFavorites(this.loggedUser.id).subscribe(
         data => { 
-          this.allFavorites = data;
+          // Si hay filtro por tags entonces lo aplico aca
+          if(this.filter && this.filter.tags) {
+            this.allFavorites = data.filter(fav => {
+              for(let tagf in fav.tags) {
+                for(let i=0; i<this.filter.tags.length; i++) {
+                  if(tagf.toLocaleLowerCase() == this.filter.tags[i].toLocaleLowerCase()){
+                    return true;
+                  }
+                }
+              }
+              return false;
+            });
+          } else { // Si no me quedo con todos
+            this.allFavorites = data;
+          }
+          
           let promises = []
           this.allFavorites.forEach(element => {
             promises.push(this.getSingleFeed(element))
@@ -192,6 +210,7 @@ export class FavoritesListComponent implements OnInit {
             .then(values => {
               values.forEach(feed => {
                 this.newsList.push(feed);
+
               });
               resolve(true)
             })
@@ -206,5 +225,5 @@ export class FavoritesListComponent implements OnInit {
       )
     })
   }
-}
 
+}

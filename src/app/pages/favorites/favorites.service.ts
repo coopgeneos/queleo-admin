@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { RSS } from './models/rss';
 import { FeedEntry } from './models/feed-entry';
@@ -9,6 +9,7 @@ import { NgxXml2jsonService } from 'ngx-xml2json';
 import { Category } from './models/category';
 import { Favorite } from './models/favorite';
 import { User } from '../news/models/user';
+import { Tag } from '../news/models/tag';
 
 @Injectable()
 export class FavoritesService {
@@ -75,6 +76,18 @@ export class FavoritesService {
       })
     )
   }
+  getTagsOfUser(id: string) : Observable<Tag[]> {
+    return this.firebaseDB.list<Tag>('/users/' + id + '/tags').snapshotChanges().pipe(
+      map(result => {
+        return result.map(rtag => {
+          let tag = new Tag();
+          tag._init(rtag);
+          return tag;
+        })
+      })
+    )
+  }
+  
 
   getFeedByKey(key: string) : Observable<FeedEntry> {
     return this.firebaseDB.object('news/'+key).snapshotChanges().pipe(

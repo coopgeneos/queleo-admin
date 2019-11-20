@@ -1,5 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { UsersService } from '../../../news/users.service';
+import { AuthService } from '../../../../auth/auth.service';
+import { ToastAlertService } from '../../../../services/toast-alert.service';
+import { FavoritesService } from '../../favorites.service';
 
 @Component({
   selector: 'ngx-favorites-filter',
@@ -14,6 +18,9 @@ export class FavoritesFilterComponent implements OnInit {
   filterTitle: string = "";
   categories: any[];
   sources: any[];
+  tags: any[];
+  loggedUser: any;
+
   order: string = "desc";
   hiddenFields: any[] = [
     {name:"title", selected: false},
@@ -24,33 +31,44 @@ export class FavoritesFilterComponent implements OnInit {
 
   timer: NodeJS.Timer;
 
-  constructor(private firebaseDB: AngularFireDatabase) { }
+  constructor(private firebaseDB: AngularFireDatabase,
+              protected userService: UsersService,
+              protected toastService: ToastAlertService,
+              protected favoriteService: FavoritesService,
+              protected authService: AuthService) 
+              { }
 
-  ngOnInit() {
-    if(!this.sourcesPath) this.sourcesPath = "/sources";
-
-    this.loadCategories();
-    this.loadSources();
-  }
-
-  loadCategories() : void {
-    this.firebaseDB.list('/categories').snapshotChanges().subscribe(
-      data => {
-        this.categories = data.map(elem => {return {name: elem.payload.val(), selected: true}});
+  async ngOnInit() {
+    if(!this.sourcesPath) {this.sourcesPath = "/sources"};
+    this.userService.getUserByEmail(this.authService.getLoggedUser().email).subscribe(
+      async user => { 
+        this.loggedUser = user; 
+        this.loggedUser.id = user.id
+        this.tags = user.tags ? user.tags : [];
+        this.tags.sort((a, b) => {
+          if(a.value > b.value) {return 1}
+          if(a.value < b.value) {return -1}
+          return 0;
+        });
+        this.loadTags();
       },
-      error => {},
-      () => {}
+      error => { 
+        this.toastService.showAlert('danger', 'Error', 'Hubo un error cargando la pagina');
+        console.error(error)
+      }
     )
+    
   }
+    
+  
 
-  loadSources() : void {
-    this.firebaseDB.list(this.sourcesPath).snapshotChanges().subscribe(
-      data => {
-        this.sources = data.map(elem => {return {name: elem.payload.val(), selected: true}});
-      },
-      error => {},
-      () => {}
-    )
+  
+  loadTags() : void {
+    
+        
+    this.tags.forEach(tag => { tag['selected']  = false ;
+      
+    });        
   }
 
   filter() : void {
@@ -59,17 +77,17 @@ export class FavoritesFilterComponent implements OnInit {
       filter['title'] = this.filterTitle;
     }
 
-    let sources_f = this.sources.filter(source => { return source.selected })
-    sources_f = sources_f.length > 0 ? sources_f.map(source => { return source.name }) : [];
-    if(sources_f.length > 0) {
-      filter['sources'] = sources_f;
+    let tags_f = this.tags.filter(tag => { return tag.selected })
+    tags_f = tags_f.length > 0 ? tags_f.map(tag => { return tag.value }) : [];
+    if(tags_f.length > 0) {
+      filter['tags'] = tags_f;
     }
 
-    let cat_f = this.categories.filter(cat => { return cat.selected })
+   /*  let cat_f = this.categories.filter(cat => { return cat.selected })
     cat_f = cat_f.length > 0 ? cat_f.map(cat => { return cat.name }) : [];
     if(cat_f.length > 0) {
-      filter['categories'] = cat_f;
-    }
+      filter['categories'] = cat_f; 
+    } */
 
     let hidden_f = this.hiddenFields.filter(field => { return field.selected })
     hidden_f = hidden_f.length > 0 ? hidden_f.map(field => { return field.name }) : [];
@@ -87,17 +105,7 @@ export class FavoritesFilterComponent implements OnInit {
     this.setTimer();
   }
 
-  filterByCategory(index: number, selected: boolean) : void {
-    this.categories[index].selected = selected;
-    clearTimeout(this.timer);
-    this.setTimer();
-  }
-
-  filterBySource(index: number, selected: boolean) : void {
-    this.sources[index].selected = selected;
-    clearTimeout(this.timer);
-    this.setTimer();
-  }
+  
 
   changeOrder(value: string) : void {
     this.order = value;
@@ -107,6 +115,11 @@ export class FavoritesFilterComponent implements OnInit {
 
   hiddeField(index: number, selected: boolean) : void {
     this.hiddenFields[index].selected = selected;
+    clearTimeout(this.timer);
+    this.setTimer();
+  }
+  selectTag(index: number, selected: boolean) : void {
+    this.tags[index].selected = selected;
     clearTimeout(this.timer);
     this.setTimer();
   }

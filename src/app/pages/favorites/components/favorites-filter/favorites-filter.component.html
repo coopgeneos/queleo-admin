@@ -22,29 +22,14 @@
     </nb-card-body>
   </nb-card>
 </div>
-
-<!-- Sources Widget -->
+<!-- filtro por tags -->
 <div class="row">
   <nb-card class="card-filter">
-    <nb-card-header>Filtrar por fuentes</nb-card-header>
+    <nb-card-header>Filtrar por tags</nb-card-header>
     <nb-card-body>
       <div class="demo-items">
-        <nb-checkbox *ngFor="let source of sources; let i = index" [checked]="source.selected"
-          (change)="filterBySource(i, $event.target.checked)">{{source.name | capitalize}}
-        </nb-checkbox>
-      </div>
-    </nb-card-body>
-  </nb-card>
-</div>
-
-<!-- Categories Widget -->
-<div class="row">
-  <nb-card class="card-filter">
-    <nb-card-header>Filtrar por categorías</nb-card-header>
-    <nb-card-body>
-      <div class="demo-items">
-        <nb-checkbox *ngFor="let category of categories; let i = index" [checked]="category.selected"
-          (change)="filterByCategory(i, $event.target.checked)">{{category.name | capitalize}}
+        <nb-checkbox *ngFor="let tag of tags; let i = index" [checked]="tag.selected"
+          (change)="selectTag(i, $event.target.checked)">{{tag.value | capitalize}}
         </nb-checkbox>
       </div>
     </nb-card-body>
