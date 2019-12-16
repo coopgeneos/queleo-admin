@@ -2,33 +2,87 @@
   <nb-card-body>
     <nb-stepper orientation="horizontal">
       <nb-step [label]="labelOne">
-        <ng-template #labelOne>First step</ng-template>
-        <h3>Step content #1</h3>
-        <button nbButton disabled nbStepperNext>prev</button>
-        <button nbButton nbStepperNext>next</button>
+        <ng-template #labelOne>Perfil</ng-template>
+        <h3>Crea un nuevo perfil de búsqueda</h3>
+        <h6>Configura una serie de noticias dentro de un perfil de búsqueda que deseas seguir
+          RECUERDA: ¡puedes crear tantos perfiles como quieras!</h6>
+        <input type="text" nbInput fullWidth placeholder="Perfil">
+        <button nbButton disabled nbStepperNext>Anterior</button>
+        <button nbButton nbStepperNext>Siguiente</button>
       </nb-step>
       <nb-step [label]="labelTwo">
-        <ng-template #labelTwo>Second step</ng-template>
-        <h3>Step content #2</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext>next</button>
+        <ng-template #labelTwo>Categorías</ng-template>
+        <h3>Categoriza a tu perfil de búsqueda</h3>
+        <h6>Elige qué categoría/s seguir</h6>
+        <nb-card>
+          <!-- <nb-card-header>Checkboxes & Radios</nb-card-header> -->
+          <nb-card-body class="checkbox-radio">
+            <div class="demo-items">
+              <nb-checkbox>Política</nb-checkbox>
+              <nb-checkbox>Economía</nb-checkbox>
+              <nb-checkbox>Turismo</nb-checkbox>
+              <nb-checkbox>Ciencia</nb-checkbox>
+              <nb-checkbox>Deporte</nb-checkbox>
+              <nb-checkbox>Tiempo Libre</nb-checkbox>
+              <nb-checkbox>Educación</nb-checkbox>
+              <nb-checkbox>Arte</nb-checkbox>
+            </div>
+          </nb-card-body>
+        </nb-card>
+        <button nbButton nbStepperPrevious>Anterior</button>
+        <button nbButton nbStepperNext>Siguiente</button>
       </nb-step>
-      <nb-step label="Third step">
-        <h3>Step content #3</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton nbStepperNext>next</button>
-      </nb-step>
-      <nb-step [label]="labelFour">
-        <ng-template #labelFour>Fourth step</ng-template>
-        <h3>Step content #4</h3>
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton disabled nbStepperNext>next</button>
+      <nb-step [label]="labelTree">
+        <ng-template #labelTree>Contenido</ng-template>
+        <h3>Especifica el contenido del favorito</h3>
+        <h6>Selecciones las fuentes a seguir</h6>
+        <nb-accordion>
+          <nb-accordion-item #item>
+            <nb-accordion-item-header>
+              <nb-icon class="action-icon" icon="settings-2-outline"></nb-icon>
+                Clarin / Rural
+              <button nbButton>Agregar</button>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <b>clarin.com/rural</b>
+              <br>
+              Web del periódico argentino de información sobre medio rural y la cadena de valor
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+    
+          <nb-accordion-item>
+            <nb-accordion-item-header>
+              <nb-icon class="action-icon" icon="settings-2-outline"></nb-icon>
+                Clarin / Rural
+              <button nbButton>Agregar</button>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <b>clarin.com/rural</b>
+              Web del periódico argentino de información sobre medio rural y la cadena de valor
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+    
+          <nb-accordion-item>
+            <nb-accordion-item-header>
+              <nb-icon class="action-icon" icon="settings-2-outline"></nb-icon>
+                Clarin / Rural
+              <button nbButton>Agregar</button>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+              <b>clarin.com/rural</b>
+              Web del periódico argentino de información sobre medio rural y la cadena de valor
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+    
+        <button nbButton nbStepperPrevious>Anterior</button>
+        <button nbButton nbStepperNext>Finalizar</button>
       </nb-step>
     </nb-stepper>
   </nb-card-body>
 </nb-card>
 
-<div class="steppers-container row">
+<!-- <div class="steppers-container row">
   <div class="col-md-12 col-lg-6 col-xxxl-6">
     <nb-card>
       <nb-card-body>
@@ -140,4 +194,4 @@
       </nb-card-body>
     </nb-card>
   </div>
-</div>
+</div> -->
