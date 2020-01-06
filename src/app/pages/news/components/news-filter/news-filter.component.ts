@@ -114,7 +114,7 @@ export class NewsFilterComponent implements OnInit {
   setTimer() : void {
     this.timer = setTimeout(() => {
       this.filter();
-    }, 2000);
+    }, 1500);
   }
 
   resetTimer() : void {

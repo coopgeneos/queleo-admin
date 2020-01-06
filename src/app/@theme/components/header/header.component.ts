@@ -23,6 +23,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   themes = [
     {
+      value: 'queleo',
+      name: 'QueLeo',
+    },
+    {
       value: 'default',
       name: 'Light',
     },

@@ -38,6 +38,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { QUELEO_THEME } from './styles/theme.queleo';
 import { AuthService } from '../auth/auth.service';
 
 const NB_MODULES = [
@@ -84,9 +85,9 @@ export class ThemeModule {
         AuthService,
         ...NbThemeModule.forRoot(
           {
-            name: 'default',
+            name: 'queleo',
           },
-          [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME ],
+          [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME, QUELEO_THEME ],
         ).providers,
       ],
     };
