@@ -2,19 +2,19 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'News',
+    title: 'Noticias',
     icon: 'cast-outline',
     link: '/pages/news',
     home: true,
   },
   {
-    title: 'Favorites',
+    title: 'Favoritos',
     icon: 'flag-outline',
     link: '/pages/favorites',
     home: true,
   },
   {
-    title: 'Communities',
+    title: 'Comunidades',
     icon: 'people-outline',
     link: '/pages/communities',
     home: true,

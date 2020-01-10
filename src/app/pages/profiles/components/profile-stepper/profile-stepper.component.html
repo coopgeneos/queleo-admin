@@ -1,0 +1,59 @@
+<nb-card>
+  <nb-card-body>
+    <nb-stepper #stepper>
+      <nb-step [stepControl]="firstForm" label="Perfil">
+        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+          <p class="lorem">
+            Configura una serie de noticias dentro de un perfil de busqueda que desea seguir
+            ¡Puedes crear tantos perfiles como quieras!
+          </p>
+          <div class="input-group">
+            <input type="text" placeholder="Enter its name" class="form-control" formControlName="firstCtrl"
+                   [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+          </div>
+          <div class="div-stepper-buttons">
+            <button nbButton nbStepperNext (click)="onFirstSubmit()" class="button-steps button-prev" >Siguiente</button>
+          </div>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="secondForm" label="Categorías">
+        <p class="lorem">
+          Elije que categorías seguir
+        </p>
+        <div class="input-group">
+          <nb-checkbox *ngFor="let category of categories; let i = index" [checked]="category.selected"  
+            (change)="touchCategory(i, $event.target.checked)">{{category.name | capitalize}}
+          </nb-checkbox>
+        </div>
+        <div class="div-stepper-buttons">
+          <button nbButton nbStepperPrevious (click)="backStep()" class="button-steps button-prev">Anterior</button>
+          <button nbButton nbStepperNext (click)="onSecondSubmit()" disabled="{{disableStep}}" class="button-steps">Siguiente</button>
+        </div>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm" label="Contenidos">
+        <p class="lorem">
+          Seleccione las fuentes con las que desea informarse.
+        </p>
+        <div class="input-group">
+          <nb-list>
+              <nb-list-item *ngFor="let rss of rssFilteredList">
+                {{ rss.source | capitalize }} - {{ rss.category | capitalize }}
+                <button nbButton *ngIf="!rss.selected" status="primary" size="tiny" class="button-third-step" (click)="addRssToProfile(rss)">Agregar</button>
+                <button nbButton *ngIf="rss.selected" status="danger" size="tiny" class="button-third-step" (click)="removeRssFromProfile(rss)">Borrar</button>
+              </nb-list-item>
+            </nb-list>
+        </div>
+        <div class="div-stepper-buttons">
+          <button nbButton nbStepperPrevious (click)="backStep()" class="button-steps button-prev">Anterior</button>
+          <button nbButton nbStepperNext (click)="onThirdSubmit()" class="button-steps" disabled="{{disableStep}}">Confirmar</button>
+        </div>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+        <div class="div-stepper-complete">
+          <h3>Perfil completo!</h3>
+          <a nbButton [routerLink]="['/pages/profiles']" class="button-steps">Listado</a>
+        </div>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

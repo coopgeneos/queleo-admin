@@ -1,0 +1,23 @@
+<div class="div-button-add row">
+  <a nbButton filled shape="round" [routerLink]="['/pages/profile']" class="button-add pull-right">
+    <nb-icon icon="plus-outline"></nb-icon>
+  </a>
+</div>
+
+<nb-card class="list-card">
+  <nb-card-header>Perfiles</nb-card-header>
+  <nb-card-body>
+    <nb-list>
+      <nb-list-item *ngFor="let profile of profiles; let i = index">
+        {{ profile.name }}
+        <button nbButton status="primary" size="tiny" class="button-update" (click)="viewNews(i)">Ver</button>
+        <button nbButton status="primary" size="tiny" class="button-update" (click)="goToProfile(i)">Actualizar</button>
+        <!-- <button nbButton status="primary" size="tiny" class="button-update" (click)="setDefault(i)">Por defecto</button> -->
+      </nb-list-item>
+    </nb-list>
+  </nb-card-body>
+</nb-card>
+
+<!-- <a nbButton filled shape="round" [routerLink]="['/pages/profile']" class="button-add">
+  Nuevo
+</a> -->

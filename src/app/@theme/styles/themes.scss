@@ -92,7 +92,8 @@ $nb-themes: nb-register-theme((
 ), queleo, default);
 
 .menu-sidebar {
-  background-color: #a2181d;
+  // background-color: #a2181d;
+  background: linear-gradient(to bottom,#bf2025 50%,#a2181d 50%); /* W3C */
 } 
 
 .nb-theme-queleo nb-icon {
@@ -107,6 +108,10 @@ $nb-themes: nb-register-theme((
   color: white !important
 }
 
+.nb-theme-queleo nb-menu .menu-item {
+  background-color: #a2181d !important;
+}
+
 .nb-theme-queleo nb-menu .menu-item:nth-child(1) {
   background-color: #bf2025 !important;
   //padding-top: 2.25rem;
@@ -116,16 +121,13 @@ $nb-themes: nb-register-theme((
   background-color: #ad1b20 !important;
 }
 
-.nb-theme-queleo nb-menu .menu-item:nth-child(3) {
-  background-color: #a2181d !important;
-}
-
 .nb-theme-queleo [_nghost-osc-c1] .menu-sidebar[_ngcontent-osc-c1] .scrollable {
   padding-top: 0rem !important;
 }
 
 ngx-news-filter .select-button, ngx-favorites-filter .select-button{
   background-color: #bf2025 !important;
+  border-color: #bf2025 !important;
   border-radius: 20em !important;
   color: white !important;
 }
@@ -164,5 +166,42 @@ ngx-community nb-card-header span, ngx-add-favorite nb-card-header {
 
 .user-picture {
   border-color: #bf2025 !important;
+}
+
+ngx-profile-stepper .label-index {
+  border-color: #bf2025 !important;
+  background-color: #ffffff !important;
+}
+
+ngx-profile-stepper .label-index span { 
+  color: #bf2025 !important;
+}
+
+nb-stepper .connector {
+  background-color: #bf2025 !important;
+}
+
+ngx-profiles-list nb-list-item .button-update, 
+ngx-profile-stepper .button-steps, 
+ngx-profile-stepper .button-third-step {
+  border-color: #bf2025 !important;
+  background-color: #bf2025 !important;
+  border-radius: 2em !important;
+}
+
+ngx-profiles-list .button-add { 
+  border-color: #bf2025 !important;
+  background-color: #bf2025 !important;
+  
+}
+
+ngx-profiles-list nb-icon {
+  color: #ffffff !important;
+}
+
+ngx-community-list .formButton {
+  border-color: #bf2025 !important;
+  background-color: #bf2025 !important;
+  border-radius: 2em !important;
 }
 

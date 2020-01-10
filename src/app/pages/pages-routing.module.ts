@@ -10,6 +10,8 @@ import { NewsListComponent } from './news/components/news-list/news-list.compone
 import { CommunityListComponent } from './communities/components/community-list/community-list.component';
 import { CommunityComponent } from './communities/components/community/community.component';
 import { FavoritesListComponent } from './favorites/components/favorites-list/favorites-list.component';
+import { ProfileStepperComponent } from './profiles/components/profile-stepper/profile-stepper.component';
+import { ProfilesListComponent } from './profiles/components/profiles-list/profiles-list.component';
 
 const adminOnly = hasCustomClaim('admin');
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth/login']);
@@ -36,6 +38,21 @@ const routes: Routes = [{
     {
       path: 'community/:id',
       component: CommunityComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    },
+    {
+      path: 'profiles',
+      component: ProfilesListComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    },
+    {
+      path: 'profile',
+      component: ProfileStepperComponent,
+      canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    },
+    {
+      path: 'profile/:id',
+      component: ProfileStepperComponent,
       canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
     },
     {

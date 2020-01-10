@@ -46,10 +46,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'Perfiles' }, { title: 'Salir' } ];
 
   pagesWithsearch: string[] = ['/pages/news', '/pages/community/'];
   showSearch: boolean = false;
+
+  logosrc = "assets/images/logoQueLeo.png";
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -94,6 +96,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.menuService.onItemClick().subscribe(
       menuBag => {
+        if(menuBag.item.title === this.userMenu[0].title) {
+          this.router.navigate(["pages/profiles"])
+        }
         if(menuBag.item.title === this.userMenu[1].title) {
           this.authService.logout().then(() => this.router.navigate(["pages"]))
         }

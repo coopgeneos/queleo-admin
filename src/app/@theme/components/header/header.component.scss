@@ -50,6 +50,10 @@
       white-space: nowrap;
       text-decoration: none;
     }
+
+    .logoQueLeo {
+      width: 6em;
+    }
   }
 
   @include media-breakpoint-down(sm) {

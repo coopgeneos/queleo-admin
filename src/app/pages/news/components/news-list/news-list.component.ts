@@ -4,6 +4,7 @@ import { RSS } from '../../models/rss';
 import { NbComponentStatus } from '@nebular/theme';
 import { FeedEntry } from '../../models/feed-entry';
 import { ToastAlertService } from '../../../../services/toast-alert.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ngx-news-list',
@@ -38,13 +39,38 @@ export class NewsListComponent implements OnInit {
     'danger',
   ];
 
-  constructor(private newsService: NewsService, private toastrService: ToastAlertService) {
-    if(!this.rssPath) this.rssPath = '/rssx';
-    if(!this.sourcesPath) this.sourcesPath = null;
-    this.title = "De su interés..."
+  constructor(
+    private newsService: NewsService, 
+    private toastrService: ToastAlertService,
+    private activatedRouter: ActivatedRoute ) {
+      /* this.activatedRouter.params.subscribe(
+        params => { 
+          console.log("params",params)
+          let _rss = params['rss'] ? params['rss'].replace(/#/g,'/') : null;
+          let _sources = params['sources'] ? params['sources'].replace(/#/g,'/') : null;
+          this.rssPath = _rss; 
+          this.sourcesPath = _sources;
+        }
+      ); */
+
+      
+
+      if(!this.rssPath) this.rssPath = '/rssx';
+      if(!this.sourcesPath) this.sourcesPath = null;
+      this.title = "De su interés..."
   }
 
   async ngOnInit() {
+    this.activatedRouter.queryParams
+        .subscribe(params => {
+           // {order: "popular"}
+          let _rss = params['rss'] ? params['rss'].replace(/#/g,'/') : null;
+          let _sources = params['sources'] ? params['sources'].replace(/#/g,'/') : null;
+          this.rssPath = _rss ? _rss : this.rssPath; 
+          this.sourcesPath = _sources ? _sources : this.sourcesPath;
+          console.log(params, this.rssPath, this.sourcesPath);
+        });
+
     this.listCard.loading = false;
     await this.loadNext(null)
   }

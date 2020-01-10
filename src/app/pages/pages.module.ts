@@ -13,6 +13,7 @@ import { AuthModule } from '../auth/auth.module'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { FavoritesModule } from './favorites/favorites.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { FavoritesModule } from './favorites/favorites.module';
     NewsModule,
     CommunitiesModule,
     AuthModule,
-    FavoritesModule
+    FavoritesModule,
+    ProfilesModule
   ],
   declarations: [
     PagesComponent,
